@@ -70,7 +70,7 @@ void menu()
 
 void inicializar()
 {
-	// se a lista j� possuir elementos
+	// se a lista j� possuir elementos
 // libera a memoria ocupada
 	NO* aux = primeiro;
 	while (aux != NULL) {
@@ -111,32 +111,56 @@ void exibirElementos()
 		}
 	}
 }
-
+//ta meio freestyle porque eu não consegui baixar o visual studio 2019 e o visual studio code é pessimo de compilar C++ mas o João ajudou demais a entender o código
 void inserirElemento()
 {
 	// aloca memoria dinamicamente para o novo elemento
 	NO* novo = (NO*)malloc(sizeof(NO));
+	//verificação padrão
 	if (novo == NULL)
 	{
 		return;
 	}
-
+	//pede para o usuario digitar
 	cout << "Digite o elemento: ";
+	//usuario digita 'novo' que esta apontando para o 'valor' 
 	cin >> novo->valor;
+	//'novo' aponta para o proximo que é nulo porque AINDA NAO tem mais de um valor digitado pelo usuário
 	novo->prox = NULL;
 
-	if (primeiro == NULL)
+	//esse eu penei pra entender pelo amor de deus
+	//ponteiro do 'achou'(valor a ser comparado com os outros da lista) é equivalente a posicaoElemento (numero do elemento na lista) onde 'novo' aponta pro 'valor'(da posicao) e diz em qual lugar da lista o número está
+	NO* achou = posicaoElemento(novo->valor);
+	//se 'achou' nao existir na lista
+	if (achou == NULL)
 	{
+		//o primeiro valor equivale ao novo
 		primeiro = novo;
 	}
 	else
 	{
-		// procura o final da lista
+		// se o nó auxiliar for equivalente ao 'primeiro'
 		NO* aux = primeiro;
-		while (aux->prox != NULL) {
+		//enquanto o auxiliar que aponta para o proximo for diferente de NULL **E** o auxiliar que aponta para o proximo que aponta para o valor for menor que novo que aponta para o valor
+		while (aux->prox != NULL && aux->prox->valor < novo->valor) {
+			//auxiliar equivale a ele mesmo e começa a apontar para o proximo
 			aux = aux->prox;
 		}
-		aux->prox = novo;
+
+		/*
+			//caso o novo que aponta para o valor for menor que o auxiliar que aponta pro proximo que aponta pro valor (??????????????)
+			if (novo->valor < aux->prox->valor) {
+				//se o novo que aponta para o valor for menor que o auxiliar que aponta para o valor
+				if(novo->valor < aux->valor){
+					//primeiro equivale ao novo
+				primeiro = novo;
+				//novo aponta para o proximo que equivale ao auxiliar
+				novo->prox = aux;
+				}
+			}//fim do if
+		NO* aux = NULL; //no auxiliar fica nulo
+		aux->prox = novo;//auxiliar aponta para o proximo que equivale ao novo
+		novo*/
 	}
 }
 
@@ -149,5 +173,8 @@ void buscarElemento()
 {
 
 }
+
+
+
 
 

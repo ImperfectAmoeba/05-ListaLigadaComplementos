@@ -134,9 +134,8 @@ void inserirElemento()
 	}
 	else
 	{
-		// procura o final da lista
-		aux->prox = novo;
-		ultimo = novo; //misericordia
+		ultimo->prox = novo; 
+        ultimo = novo;  
 	}
 }
 
